@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>QR code with Guid</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+    <!-- Library to generate QR codes -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+    <div class="center">
+        <div id="qrcode"></div>
+    </div>
+    
+    <script type="text/javascript">
+        //Generates fake Guids
+        function uuidv4() {
+            return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+            (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16));
+        }
+        // Function to generate QR code
+        function generateQRCode() {
+            document.getElementById("qrcode").innerHTML = "";
+            var size = Math.min(window.innerWidth, window.innerHeight);
+            new QRCode(document.getElementById("qrcode"), {
+                text: uuidv4(),
+                width: size,
+                height: size
+            });
+        }
+
+        document.body.addEventListener('click', generateQRCode);
+        document.body.addEventListener('touchstart', generateQRCode);
+        
+        generateQRCode();
+
+    </script>
+    
+</body>
+</html>
