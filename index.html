@@ -24,10 +24,11 @@
         function generateQRCode() {
             document.getElementById("qrcode").innerHTML = "";
             var size = Math.min(window.innerWidth, window.innerHeight);
+            var scale = 3;
             new QRCode(document.getElementById("qrcode"), {
                 text: uuidv4(),
-                width: size,
-                height: size
+                width: size/scale,
+                height: size/scale
             });
         }
 
